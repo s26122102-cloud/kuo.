@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PORTFOLIO v1.0 // Y2K QUEST CENTER</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DotGothic16&family=VT323&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --y2k-pink: #ff007f;
+            --y2k-cyan: #00f0ff;
+            --y2k-purple: #7928ca;
+            --y2k-lime: #39ff14;
+            --y2k-yellow: #ffea00;
+            --y2k-silver: #c0c0c0;
+            --y2k-dark-silver: #808080;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', 'DotGothic16', sans-serif;
+            background-color: #0b0813;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(121, 40, 202, 0.25) 0%, transparent 60%),
+                radial-gradient(circle at 10% 20%, rgba(0, 240, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(255, 0, 127, 0.18) 0%, transparent 40%),
+                linear-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 100% 100%, 20px 20px, 20px 20px;
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* CRT Overlay Effect */
+        .crt-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px;
+            z-index: 99;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        /* Pixel Typography */
+        .font-pixel {
+            font-family: 'Press Start 2P', cursive;
+        }
+        .font-vt {
+            font-family: 'VT323', monospace;
+        }
+
+        /* Y2K Window Bevel Border Style (90s Windows Classic Style) */
+        .y2k-window {
+            background: #c0c0c0;
+            border-top: 3px solid #ffffff;
+            border-left: 3px solid #ffffff;
+            border-right: 3px solid #404040;
+            border-bottom: 3px solid #404040;
+            box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 240, 255, 0.3);
+        }
+
+        .y2k-window-titlebar {
+            background: linear-gradient(90deg, #000080, #1084d0, #00f0ff);
+            color: white;
+            font-family: 'Press Start 2P', cursive;
+            text-shadow: 1px 1px #000;
+        }
+
+        /* Metallic Button Style */
+        .btn-y2k-active {
+            background: linear-gradient(180deg, #ffffff 0%, #e0e0e0 45%, #a6a6a6 50%, #d4d4d4 100%);
+            border-top: 2px solid #ffffff;
+            border-left: 2px solid #ffffff;
+            border-right: 2px solid #262626;
+            border-bottom: 2px solid #262626;
+            box-shadow: 3px 3px 0px #000000;
+            color: #000000;
+            transition: all 0.15s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-y2k-active:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0px #000000, 0 0 15px var(--y2k-cyan);
+            background: linear-gradient(180deg, #ffffff 0%, #00f0ff 30%, #0099ff 70%, #e0e0e0 100%);
+            color: #000;
+        }
+
+        .btn-y2k-active:active {
+            transform: translate(2px, 2px);
+            box-shadow: 1px 1px 0px #000000;
+            border-top: 2px solid #262626;
+            border-left: 2px solid #262626;
+            border-right: 2px solid #ffffff;
+            border-bottom: 2px solid #ffffff;
+        }
+
+        /* Locked Button Style */
+        .btn-y2k-locked {
+            background: linear-gradient(180deg, #4a4a4a 0%, #2b2b2b 100%);
+            border-top: 2px solid #666666;
+            border-left: 2px solid #666666;
+            border-right: 2px solid #111111;
+            border-bottom: 2px solid #111111;
+            color: #888888;
+            cursor: not-allowed;
+            position: relative;
+            user-select: none;
+        }
+
+        .btn-y2k-locked:hover {
+            animation: lockShake 0.3s ease-in-out forwards;
+            box-shadow: 0 0 10px rgba(255, 0, 127, 0.5);
+            border-color: var(--y2k-pink);
+        }
+
+        @keyframes lockShake {
+            0% { transform: translateX(0); }
+            20% { transform: translateX(-3px) rotate(-1deg); }
+            40% { transform: translateX(3px) rotate(1deg); }
+            60% { transform: translateX(-3px) rotate(-1deg); }
+            80% { transform: translateX(3px) rotate(1deg); }
+            100% { transform: translateX(0); }
+        }
+
+        /* Neon Glow Text */
+        .neon-text-pink {
+            text-shadow: 0 0 5px #ff007f, 0 0 10px #ff007f, 0 0 20px #ff007f;
+        }
+        .neon-text-cyan {
+            text-shadow: 0 0 5px #00f0ff, 0 0 10px #00f0ff, 0 0 20px #00f0ff;
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(1deg); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* Marquee */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 18s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Cyber Pulse Circle */
+        .cyber-avatar-ring {
+            background: conic-gradient(from 0deg, var(--y2k-pink), var(--y2k-cyan), var(--y2k-lime), var(--y2k-pink));
+            animation: spin 6s linear infinite;
+        }
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="p-2 md:p-6 flex flex-col items-center justify-between min-h-screen">
+    <!-- CRT Screen Lines Overlay -->
+    <div class="crt-overlay"></div>
+
+    <!-- Top Announcement Bar (Y2K Marquee) -->
+    <header class="w-full max-w-5xl mb-4">
+        <div class="bg-black border-2 border-cyan-400 p-2 rounded-none shadow-[0_0_15px_rgba(0,240,255,0.4)] flex items-center gap-2">
+            <span class="bg-pink-600 text-black font-pixel text-xs px-2 py-1 uppercase font-bold tracking-wider animate-pulse">
+                ★ NOTICE ★
+            </span>
+            <div class="marquee-container w-full font-vt text-cyan-300 text-xl tracking-widest">
+                <div class="marquee-content">
+                    WELCOME TO MY WEB PROGRAMMING PORTFOLIO QUEST PORTFOLIO ✦ 2026 EDITION ✦ SELECT YOUR MISSION BELOW ✦ ALL SYSTEMS GO ✦ LOADING WEEK 01 & WEEK 02... &nbsp;&nbsp;&nbsp;&nbsp; WELCOME TO MY WEB PROGRAMMING PORTFOLIO QUEST PORTFOLIO ✦ 2026 EDITION ✦ SELECT YOUR MISSION BELOW ✦ ALL SYSTEMS GO ✦ LOADING WEEK 01 & WEEK 02...
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Window Container -->
+    <main class="w-full max-w-5xl y2k-window p-1 md:p-2 mb-6">
+        <!-- Window Title Bar -->
+        <div class="y2k-window-titlebar px-3 py-1.5 flex justify-between items-center text-xs md:text-sm font-bold mb-3 select-none">
+            <div class="flex items-center gap-2 truncate">
+                <span class="text-yellow-300">⚡</span>
+                <span class="tracking-wider truncate">C:\USERS\STUDENT\PORTFOLIO_QUEST_SYSTEM.EXE</span>
+            </div>
+            <!-- Retro Window Controls -->
+            <div class="flex items-center gap-1">
+                <button class="bg-gray-300 text-black w-5 h-5 font-pixel text-[10px] border border-white border-b-black border-r-black active:translate-y-0.5">_</button>
+                <button class="bg-gray-300 text-black w-5 h-5 font-pixel text-[10px] border border-white border-b-black border-r-black active:translate-y-0.5">□</button>
+                <button class="bg-red-500 text-white w-5 h-5 font-pixel text-[10px] border border-white border-b-black border-r-black active:translate-y-0.5">X</button>
+            </div>
+        </div>
+
+        <!-- Inner Window Body -->
+        <div class="bg-black/85 p-4 md:p-8 border-2 border-gray-600 backdrop-blur-sm">
+            
+            <!-- Profile & Header Section -->
+            <section class="flex flex-col items-center text-center mb-8 relative">
+                <!-- Retro Floating Decorative Badges -->
+                <div class="hidden sm:block absolute -top-2 left-4 text-pink-500 font-pixel text-xs bg-black border border-pink-500 p-2 animate-float">
+                    ✦ Y2K EDITION ✦
+                </div>
+                <div class="hidden sm:block absolute -top-2 right-4 text-cyan-400 font-pixel text-xs bg-black border border-cyan-400 p-2 animate-float" style="animation-delay: -2s;">
+                    STATUS: ONLINE ●
+                </div>
+
+                <!-- Avatar Container with Cyber Ring -->
+                <div class="relative w-32 h-32 md:w-40 md:w-40 mb-4 group">
+                    <div class="cyber-avatar-ring absolute inset-0 rounded-full p-1 shadow-[0_0_20px_rgba(255,0,127,0.6)]"></div>
+                    <div class="w-full h-full rounded-full overflow-hidden relative z-10 border-4 border-black bg-gray-900 flex items-center justify-center">
+                        <!-- Default Avatar Placeholder (Retro Style) -->
+                        <img 
+                            src="https://api.dicebear.com/7.x/pixel-art/svg?seed=CyberStudent2026" 
+                            alt="Student Avatar" 
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                            onerror="this.onerror=null; this.src='https://placehold.co/160x160/1a0033/00f0ff?text=AVATAR';"
+                        />
+                    </div>
+                    <!-- Pixel Star Accent -->
+                    <span class="absolute -bottom-2 -right-2 text-3xl animate-bounce">✨</span>
+                </div>
+
+                <!-- Student Name & Title -->
+                <h1 class="text-2xl md:text-4xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-pink-500 to-yellow-300 mb-2 uppercase font-pixel">
+                    網頁程式設計作品集
+                </h1>
+                <p class="text-lg md:text-xl font-vt text-cyan-300 tracking-widest mb-3">
+                    STUDENT_NAME // CLASS_2026_PORTFOLIO
+                </p>
+
+                <!-- Status Badges -->
+                <div class="flex flex-wrap justify-center gap-2 text-xs md:text-sm font-pixel">
+                    <span class="bg-purple-900/80 text-pink-300 border border-pink-500 px-3 py-1 rounded-none shadow-[2px_2px_0px_#ff007f]">
+                        LEVEL: 02 / 16 COMPLETED
+                    </span>
+                    <span class="bg-cyan-950/80 text-cyan-300 border border-cyan-400 px-3 py-1 rounded-none shadow-[2px_2px_0px_#00f0ff]">
+                        QUEST SYSTEM ACTIVE ✦
+                    </span>
+                </div>
+            </section>
+
+            <!-- Divider Line -->
+            <div class="w-full h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent mb-8"></div>
+
+            <!-- Mission Selection Grid Header -->
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xs md:text-sm font-pixel text-yellow-300 flex items-center gap-2">
+                    <span>🎮</span> SELECT MISSION / 課程作業章節
+                </h2>
+                <span class="text-xs font-vt text-gray-400 tracking-wider">CLICK UNLOCKED CARD TO ACCESS</span>
+            </div>
+
+            <!-- 16 Grid Buttons Container -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                
+                <!-- Mission 1 (Unlocked) -->
+                <a href="w1/index.html" class="btn-y2k-active p-4 rounded-none flex flex-col justify-between h-32 group">
+                    <div class="flex justify-between items-start">
+                        <span class="font-pixel text-xs bg-black text-cyan-400 px-2 py-0.5 border border-cyan-400">
+                            WEEK 01
+                        </span>
+                        <span class="text-xl group-hover:rotate-12 transition-transform">✨</span>
+                    </div>
+                    <div>
+                        <div class="font-bold text-sm text-black group-hover:text-blue-900 transition-colors line-clamp-1">
+                            Week 1 - 數位名片
+                        </div>
+                        <div class="text-[11px] text-gray-700 font-vt mt-1 flex items-center gap-1">
+                            <span class="inline-block w-2 h-2 rounded-full bg-green-500 animate-ping"></span>
+                            MISSION UNLOCKED ➔
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Mission 2 (Unlocked) -->
+                <a href="w2/index.html" class="btn-y2k-active p-4 rounded-none flex flex-col justify-between h-32 group">
+                    <div class="flex justify-between items-start">
+                        <span class="font-pixel text-xs bg-black text-pink-400 px-2 py-0.5 border border-pink-400">
+                            WEEK 02
+                        </span>
+                        <span class="text-xl group-hover:rotate-12 transition-transform">🍕</span>
+                    </div>
+                    <div>
+                        <div class="font-bold text-sm text-black group-hover:text-pink-900 transition-colors line-clamp-1">
+                            Week 2 - 今天吃甚麼?
+                        </div>
+                        <div class="text-[11px] text-gray-700 font-vt mt-1 flex items-center gap-1">
+                            <span class="inline-block w-2 h-2 rounded-full bg-green-500 animate-ping"></span>
+                            MISSION UNLOCKED ➔
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Mission 3 (Locked) -->
+                <div class="btn-y2k-locked p-4 rounded-none flex flex-col justify-between h-32 opacity-75">
+                    <div class="flex justify-between items-start">
+                        <span class="font-pixel text-[10px] bg-black/60 text-gray-400 px-2 py-0.5 border border-gray-600">WEEK 03</span>
+                        <span class="text-lg">🔒</span>
+                    </div>
+                    <div>
+                        <div class="font-bold text-sm text-gray-300">Week 3 - 未解鎖</div>
+                        <div class="text-[10px] text-gray-500 font-vt mt-1">LOCKED - QUEST REQUIRED</div>
+                    </div>
+                </div>
+
+                <!-- Mission 4 (Locked) -->
+                <div class="btn-y2k-locked p-4 rounded-none flex flex-col justify-between h-32 opacity-75">
+                    <div class="flex justify-between items-start">
+                        <span class="font-pixel text-[10px] bg-black/60 text-gray-400 px-2 py-0.5 border border-gray-600">WEEK 04</span>
+                        <span class="text-lg">🔒</span>
+                    </div>
+                    <div>
+                        <div class="font-bold text-sm text-gray-300">Week 4 - 未解鎖</div>
+                        <div class="text-[10px] text-gray-500 font-vt mt-1">LOCKED - QUEST REQUIRED</div>
+                    </div>
+                </div>
+
+                <!-- Mission 5 (Locked) -->
+                <div class="btn-y2k-locked p-4 rounded-none flex flex-col justify-between h-32 opacity-75">
+                    <div class="flex justify-between items-start">
+                        <span class="font-pixel text-[10px] bg-black/60 text-gray-400 px-2 py-0.5 border border-gray-600">WEEK 05</span>
+                        <span class="text-lg">🔒</span>
+                    </div>
+                    <div>
+                        <div class="font-bold text-sm text-gray-300">Week 5 - 未解鎖</div>
+                        <div class="text-[10px] text-gray-500 font-vt mt-1">LOCKED - QUEST REQUIRED</div>
+                    </div>
+                </div>
+
+                <!-- Mission 6 (Locked) -->
+                <div class="btn-y2k-locked p-4 rounded-none flex flex-col justify-between h-32 opacity-75">
+                    <div class="flex justify-between items-start">
+                        <span class="font-pixel text-[10px] bg-black/60 text-gray-400 px-2 py-0.5 border border-gray-600">WEEK 06</span>
+                        <span class="text-lg">🔒</span>
+                    </div>
+                    <div>
+                        <div class="font-bold text-sm text-gray-300">Week 6 - 未解鎖</div>
+                        <div class="text-[10px] text-gray-500 font-vt mt-1">LOCKED - QUEST REQUIRED</div>
+                    </div>
+                </div>
+
+                <!-- Mission 7 (Locked) -->
+                <div class="btn-y2k-locked p-4 rounded-none flex flex-col justify-between h-32 opacity-75">
+                    <div class="flex justify-between items-start">
+                        <span class="font-pixel text-[10px] bg-black/60 text-gray-400 px-2 py-0.5 border border-gray-600">WEEK 07</span>
+                        <span class="text-lg">🔒</span>
+                    </div>
+                    <div>
+                        <div class="font-bold text-sm text-gray-300">Week 7 - 未解鎖</div>
+                        <div class="text-[10px] text-gray-500 font-vt mt-1">LOCKED - QUEST REQUIRED</div>
+                    </div>
+                </div>
+
+                <!-- Mission 8 (Locked) -->
+                <div class="btn-y2k-locked p-4 rounded-none flex flex-col justify-between h-32 opacity-75">
+                    <div class="flex justify-between items-start">
+                        <span class="font-pixel text-[10px] bg-black/60 text-gray-400 px-2 py-0.5 border border-gray-600">WEEK 08</span>
+                        <span class="text-lg">🔒</span>
+                    </div>
+                    <div>
+                        <div class="font-bold text-sm text-gray-300">Week 8 - 未解鎖</div>
+                        <div class="text-[10px] text-gray-500 font-vt mt-1">LOCKED - QUEST REQUIRED</div>
+                    </div>
+                </div>
+
+                <!-- Mission 9 (Locked) -->
+                <div class="btn-y2k-locked p-4 rounded-none flex flex-col justify-between h-32 opacity-75">
+                    <div class="flex justify-between items-start">
+                        <span class="font-pixel text-[10px] bg-black/60 text-gray-400 px-2 py-0.5 border border-gray-600">WEEK 09</span>
+                        <span class="text-lg">🔒</span>
+                    </div>
+                    <div>
+                        <div class="font-bold text-sm text-gray-300">Week 9 - 未解鎖</div>
+                        <div class="text-[10px] text-gray-500 font-vt mt-1">LOCKED - QUEST REQUIRED</div>
+                    </div>
+                </div>
+
+                <!-- Mission 10 (Locked) -->
+                <div class="btn-y2k-locked p-4 rounded-none flex flex-col justify-between h-32 opacity-75">
+                    <div class="flex justify-between items-start">
+                        <span class="font-pixel text-[10px] bg-black/60 text-gray-400 px-2 py-0.5 border border-gray-600">WEEK 10</span>
+                        <span class="text-lg">🔒</span>
+                    </div>
+                    <div>
+                        <div class="font-bold text-sm text-gray-300">Week 10 - 未解鎖</div>
+                        <div class="text-[10px] text-gray-500 font-vt mt-1">LOCKED - QUEST REQUIRED</div>
+                    </div>
+                </div>
+
+                <!-- Mission 11 (Locked) -->
+                <div class="btn-y2k-locked p-4 rounded-none flex flex-col justify-between h-32 opacity-75">
+                    <div class="flex justify-between items-start">
+                        <span class="font-pixel text-[10px] bg-black/60 text-gray-400 px-2 py-0.5 border border-gray-600">WEEK 11</span>
+                        <span class="text-lg">🔒</span>
+                    </div>
+                    <div>
+                        <div class="font-bold text-sm text-gray-300">Week 11 - 未解鎖</div>
+                        <div class="text-[10px] text-gray-500 font-vt mt-1">LOCKED - QUEST REQUIRED</div>
+                    </div>
+                </div>
+
+                <!-- Mission 12 (Locked) -->
+                <div class="btn-y2k-locked p-4 rounded-none flex flex-col justify-between h-32 opacity-75">
+                    <div class="flex justify-between items-start">
+                        <span class="font-pixel text-[10px] bg-black/60 text-gray-400 px-2 py-0.5 border border-gray-600">WEEK 12</span>
+                        <span class="text-lg">🔒</span>
+                    </div>
+                    <div>
+                        <div class="font-bold text-sm text-gray-300">Week 12 - 未解鎖</div>
+                        <div class="text-[10px] text-gray-500 font-vt mt-1">LOCKED - QUEST REQUIRED</div>
+                    </div>
+                </div>
+
+                <!-- Mission 13 (Locked) -->
+                <div class="btn-y2k-locked p-4 rounded-none flex flex-col justify-between h-32 opacity-75">
+                    <div class="flex justify-between items-start">
+                        <span class="font-pixel text-[10px] bg-black/60 text-gray-400 px-2 py-0.5 border border-gray-600">WEEK 13</span>
+                        <span class="text-lg">🔒</span>
+                    </div>
+                    <div>
+                        <div class="font-bold text-sm text-gray-300">Week 13 - 未解鎖</div>
+                        <div class="text-[10px] text-gray-500 font-vt mt-1">LOCKED - QUEST REQUIRED</div>
+                    </div>
+                </div>
+
+                <!-- Mission 14 (Locked) -->
+                <div class="btn-y2k-locked p-4 rounded-none flex flex-col justify-between h-32 opacity-75">
+                    <div class="flex justify-between items-start">
+                        <span class="font-pixel text-[10px] bg-black/60 text-gray-400 px-2 py-0.5 border border-gray-600">WEEK 14</span>
+                        <span class="text-lg">🔒</span>
+                    </div>
+                    <div>
+                        <div class="font-bold text-sm text-gray-300">Week 14 - 未解鎖</div>
+                        <div class="text-[10px] text-gray-500 font-vt mt-1">LOCKED - QUEST REQUIRED</div>
+                    </div>
+                </div>
+
+                <!-- Mission 15 (Locked) -->
+                <div class="btn-y2k-locked p-4 rounded-none flex flex-col justify-between h-32 opacity-75">
+                    <div class="flex justify-between items-start">
+                        <span class="font-pixel text-[10px] bg-black/60 text-gray-400 px-2 py-0.5 border border-gray-600">WEEK 15</span>
+                        <span class="text-lg">🔒</span>
+                    </div>
+                    <div>
+                        <div class="font-bold text-sm text-gray-300">Week 15 - 未解鎖</div>
+                        <div class="text-[10px] text-gray-500 font-vt mt-1">LOCKED - QUEST REQUIRED</div>
+                    </div>
+                </div>
+
+                <!-- Mission 16 (Locked) -->
+                <div class="btn-y2k-locked p-4 rounded-none flex flex-col justify-between h-32 opacity-75">
+                    <div class="flex justify-between items-start">
+                        <span class="font-pixel text-[10px] bg-black/60 text-gray-400 px-2 py-0.5 border border-gray-600">WEEK 16</span>
+                        <span class="text-lg">🔒</span>
+                    </div>
+                    <div>
+                        <div class="font-bold text-sm text-gray-300">Week 16 - 未解鎖 (Final)</div>
+                        <div class="text-[10px] text-gray-500 font-vt mt-1">FINAL BOSS QUEST</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Y2K Retro Footer Bar -->
+    <footer class="w-full max-w-5xl text-center py-3 border-t border-cyan-500/30 flex flex-col sm:flex-row items-center justify-between text-xs font-vt text-gray-400 gap-2">
+        <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+            <span>CYBER_PORTFOLIO_SYSTEM v1.0.4 © 2026</span>
+        </div>
+        <div class="text-cyan-300">
+            BEST VIEWED IN 1024x768 / WEB PROGRAMMING COURSE
+        </div>
+    </footer>
+</body>
+</html>

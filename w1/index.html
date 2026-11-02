@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>個人數位名片</title>
+  <style>
+    /* 1. 全局基礎設定：韓系冷調背景與字體 */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f4f4f3; /* 淡冷灰背景 */
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: #333333;
+      padding: 20px;
+    }
+
+    /* 2. 名片主體卡片 */
+    .card {
+      background: #ffffff;
+      width: 100%;
+      max-width: 320px;
+      padding: 40px 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03); /* 極輕微陰影 */
+      border: 1px solid #eaeaea; /* 細緻微邊框 */
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    /* 3. 圓形大頭貼 */
+    .avatar-wrapper {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 24px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 1px solid #e0e0e0;
+      padding: 3px; /* 留白邊框效果 */
+      background: #fff;
+    }
+
+    .avatar {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      filter: grayscale(15%); /* 微微降低飽和度，增加高冷感 */
+    }
+
+    /* 4. 名字與自我介紹 */
+    .name {
+      font-size: 1.25rem;
+      font-weight: 400;
+      letter-spacing: 2px;
+      color: #222222;
+      margin-bottom: 8px;
+    }
+
+    .bio {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: #888888;
+      letter-spacing: 0.5px;
+      line-height: 1.5;
+      margin-bottom: 32px;
+    }
+
+    /* 5. 按鈕區域 */
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .btn {
+      display: block;
+      padding: 12px 20px;
+      font-size: 0.85rem;
+      font-weight: 300;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.25s ease;
+    }
+
+    /* 簡約灰色按鈕 */
+    .btn-outline {
+      color: #4a4a4a;
+      background-color: #fafafa;
+      border: 1px solid #e5e5e5;
+    }
+
+    .btn-outline:hover {
+      background-color: #f0f0f0;
+      border-color: #d6d6d6;
+      color: #111111;
+    }
+
+    /* 暗色冷調按鈕 */
+    .btn-dark {
+      color: #ffffff;
+      background-color: #2b2b2b;
+      border: 1px solid #2b2b2b;
+    }
+
+    .btn-dark:hover {
+      background-color: #404040;
+      border-color: #404040;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <!-- 1. 圓形大頭貼照片 (可將 src 替換成你的照片網址) -->
+    <div class="avatar-wrapper">
+      <img class="avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="大頭貼">
+    </div>
+
+    <!-- 2. 名字與自我介紹 (可自訂文字) -->
+    <h1 class="name"> 郭容鈞</h1>
+    <p class="bio">喜歡跑咖</p>
+
+    <!-- 3. 連結按鈕 -->
+    <div class="links">
+      <!-- 請將 href 裡的 # 替換成你的 Instagram 網址 -->
+      <a href="https://instagram.com" target="_blank" class="btn btn-outline">INSTAGRAM</a>
+      
+      <!-- 請將 mailto: 後面替換成你的 Email 信箱 -->
+      <a href="mailto:yourname@email.com" class="btn btn-dark">EMAIL</a>
+    </div>
+  </div>
+
+</body>
+</html>
